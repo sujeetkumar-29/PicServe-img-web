@@ -91,13 +91,30 @@ const users = [
     },
 ];
 
+app.get('/',(req,res)=>{
+    res.send("Hello World");
+});
 
 app.get("/images", (req, res) => {
     res.render("index.ejs", { users });
 });
-app.get('/',(req,res)=>{
-    res.send("Hello World");
+app.get("/images/new", (req, res) => {
+    res.render("new.ejs");
 });
+app.post("/images", (req, res) => {
+    const { username,filename, imageLink } = req.body;
+      // Find user in the list or create a new one
+    let user = users.find((user) => user.username === username);
+    if (!user) {
+      user = { username, images: [] };
+      users.push(user);
+    }
+      // Add the image link to the user's images
+    user.images.push({ id: uuidv4(), url: imageLink, filename });
+    res.redirect("/images");
+  
+    // res.send(`Image link added successfully for ${username}! <a href="/">Go Back</a>`);
+  });
 
 app.listen(port,()=>{
     console.log(`Server is running on port ${port}`);

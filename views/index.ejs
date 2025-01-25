@@ -40,11 +40,12 @@
 <body>
     <div class="container">
         <h1>Welcome to PicServe!</h1>
+        <a href="/images/new">Add an Image Link</a>
         <p>Below are the images uploaded by users:</p>
         
         <% users.forEach(user => { %>
         <div class="user">
-            <h2><%= user.username %></h2>
+            <h2>@<%= user.username %></h2>
             <div class="images">
                 <% user.images.forEach(image => { %>
                 <div>
