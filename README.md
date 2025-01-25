@@ -12,7 +12,7 @@ PicServe is a web application that allows users to upload images and download th
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/sujeetkumar-29/PicServe.git
+    git clone https://github.com/sujeetkumar-29/PicServe-img-web.git
     ```
 2. Navigate to the project directory:
     ```bash
