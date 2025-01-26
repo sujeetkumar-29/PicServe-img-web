@@ -47,13 +47,14 @@
         <div class="user">
             <h2>@<%= user.username %></h2>
             <div class="images">
-                <% user.images.forEach(image => { %>
+                <% user.images.slice(0, 4).forEach(image => { %> <!-- Show only the first 4 images -->
                 <div>
                     <img src="<%= image.url %>" alt="<%= image.filename %>" />
                     <p><%= image.filename %></p>
                 </div>
                 <% }) %>
             </div>
+            <a href="/images/<%= user.username %>">See All Photos</a>
         </div>
         <% }) %>
     </div>

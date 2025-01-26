@@ -116,6 +116,19 @@ app.post("/images", (req, res) => {
     // res.send(`Image link added successfully for ${username}! <a href="/">Go Back</a>`);
   });
 
+// Show user gallery route
+app.get("/images/:username?", (req, res) => {
+    const { username } = req.params; // Use req.params to get the route parameter
+    const user = users.find((u) => u.username === username);
+    // console.log(user);
+    if (user) {
+      res.render("show", { username: user.username, images: user.images });
+    } else {
+      res.send(`<h1>No user found for "${username}". <a href="/images">Go Back</a></h1>`);
+    }
+  });
+  
+
 app.listen(port,()=>{
     console.log(`Server is running on port ${port}`);
 });
