@@ -144,7 +144,7 @@ app.get("/images/:username?", (req, res) => {
       const fileExtension = contentType.split("/")[1]; // e.g., "jpeg", "png"
   
       // Generate a filename with extension
-      const filename = `${users.images.filename}.${fileExtension}`;
+      const filename = `download images.${fileExtension}`;
   
       // Set headers to initiate a download
       res.setHeader("Content-Disposition", `attachment; filename="${filename}"`);
