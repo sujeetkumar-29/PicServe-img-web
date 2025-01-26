@@ -2,6 +2,7 @@ const express=require("express");
 const app=express();
 const path=require("path");
 const { v4: uuidv4 } = require("uuid");
+const axios = require("axios");
 const port=8080;
 
 
@@ -127,6 +128,36 @@ app.get("/images/:username?", (req, res) => {
       res.send(`<h1>No user found for "${username}". <a href="/images">Go Back</a></h1>`);
     }
   });
+  // Download Route
+  app.get("/download", async (req, res) => {
+    const { url,filename } = req.query;
+  
+    try {
+      const response = await axios({
+        url, // The image URL
+        method: "GET",
+        responseType: "stream", // Get the data as a stream
+      });
+  
+      // Extract the file extension from the `Content-Type` header
+      const contentType = response.headers["content-type"];
+      const fileExtension = contentType.split("/")[1]; // e.g., "jpeg", "png"
+  
+      // Generate a filename with extension
+      const filename = `${users.images.filename}.${fileExtension}`;
+  
+      // Set headers to initiate a download
+      res.setHeader("Content-Disposition", `attachment; filename="${filename}"`);
+      res.setHeader("Content-Type", contentType);
+  
+      // Pipe the image data to the response
+      response.data.pipe(res);
+    } catch (error) {
+      console.error("Error downloading the image:", error.message);
+      res.status(500).send("Unable to download the image.");
+    }
+  });
+  
   
 
 app.listen(port,()=>{

@@ -18,7 +18,8 @@
               <img src="<%= image.url %>" class="card-img-top" alt="Image <%= index + 1 %>">
               <div class="card-body">
                 <h5 class="card-title">Image <%= index + 1 %></h5>
-                <p class="card-text">Image URL: <a href="<%= image.url %>" target="_blank"><%= image.url %></a></p>
+                <!-- <p class="card-text">Image URL: <a href="<%= image.url %>" target="_blank"><%= image.url %></a></p> -->
+                <a href="/download?url=<%= encodeURIComponent(image.url) %>" class="download-btn" download>Download</a>
               </div>
             </div>
           </div>
